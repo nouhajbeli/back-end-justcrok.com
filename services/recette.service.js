@@ -15,6 +15,7 @@ module.exports = new (class RecetteService {
       return Recipe.models.Recipe.destroy({where: { id: id }})
     }
     updateRecette({id},paylod){
+      console.log(payload)
       return Recipe.models.Recipe.update(paylod,  {
         where: {
           id: id,

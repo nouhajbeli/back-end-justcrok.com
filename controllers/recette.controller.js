@@ -63,9 +63,21 @@ module.exports = {
   },
  
   async updateRecette(req, res, next) {
+    const reqFiles = [];
+    const url = req.protocol + "://" + req.get("host");
+    for (var i = 0; i < req.files.length; i++) {
+      reqFiles.push(req.files[i].filename);
+    }
     try {
-      const recette = await recetteService.updateRecette(req.params,req.body);
-      res.send('updated');
+      const body={    titre: req.body.titre,
+      description: req.body.description,
+      image: reqFiles[1],
+      pdf: reqFiles[0],
+      categorie:req.body.categorie,
+      ingredient :req.body.ingredient
+      }
+      const recette = await recetteService.updateRecette(req.params,body);
+      res.json(recette);
     } catch (error) {
       // handle error
       next(error)     
