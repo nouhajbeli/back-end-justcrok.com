@@ -1,5 +1,4 @@
 const recetteService = require("../services/recette.service.js");
-const recetteModel= require("../models/recette.model.js");
 const { Recipe } = require("../config/database");
 
 
@@ -17,23 +16,28 @@ module.exports = {
  
 
   async addRecette(req, res, next) {
-     console.log("--------------------------->",req.files)
-    const reqFiles = [];
-    const url = req.protocol + "://" + req.get("host");
-    for (var i = 0; i < req.files.length; i++) {
-      reqFiles.push(req.files[i].filename);
-    }
-    console.log(req.files);
+    //  console.log("--------------------------->",req.files)
+    // const reqFiles = [];
+    // const url = req.protocol + "://" + req.get("host");
+    // for (var i = 0; i < req.files.length; i++) {
+    //   reqFiles.push(req.files[i].filename);
+    // }
+    // console.log(req.files);
     try {
     const Recette = await recetteService.addRecette({
-      titre: req.body.titre,
-      description: req.body.description,
-      image: reqFiles[1],
-      pdf: reqFiles[0],
-      categorie:req.body.categorie,
-      ingredient :req.body.ingredient,
-
+      Description: req.body.Description,
+      Date: req.body.Date,
+      Cuisinier: req.file.Cuisinier,
+      temps_Préparation:req.body.temps_Préparation,
+      Ingrédient :req.body.Ingrédient,
+      temps_cuisson: req.body.temps_cuisson,
+      nombre_personne: req.body.nombre_personne,
+      Préparation: req.body.Préparation,
+      Ustensile: req.body.Ustensile,
+      Photo: req.file.filename,
+      video: req.body.video,
     });
+
    
 
     
@@ -63,9 +67,23 @@ module.exports = {
   },
  
   async updateRecette(req, res, next) {
+  
     try {
-      const recette = await recetteService.updateRecette(req.params,req.body);
-      res.send('updated');
+    
+      const recette = await recetteService.updateRecette(req.params,{
+        Description: req.body.Description,
+        Date: req.body.Date,
+        Cuisinier: req.file.Cuisinier,
+        temps_Préparation:req.body.temps_Préparation,
+        Ingrédient :req.body.Ingrédient,
+        temps_cuisson: req.body.temps_cuisson,
+        nombre_personne: req.body.nombre_personne,
+        Préparation: req.body.Préparation,
+        Ustensile: req.body.Ustensile,
+        Photo: req.file.filename,
+        video: req.body.video,
+      });
+      res.json(recette);
     } catch (error) {
       // handle error
       next(error)     

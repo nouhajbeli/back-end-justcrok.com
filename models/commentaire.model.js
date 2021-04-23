@@ -13,9 +13,8 @@ const createCommentaireModel = (sequelize) => {
       commentaire: {
         type: DataTypes.STRING,
       },
-      RecipeId: {
+      Id_recette: {
         type: DataTypes.STRING,
-        allowNull: true,
       },
     
     },
@@ -24,7 +23,7 @@ const createCommentaireModel = (sequelize) => {
       dialectOptions: {
         collate: "utf8_general_ci",
       },
-      tableName: `${sequelize.config.database}.commentaires`,
+      tableName: `${sequelize.config.database}.commentairesRecette`,
     }
   );
 
