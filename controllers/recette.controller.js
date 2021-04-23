@@ -1,6 +1,7 @@
 const recetteService = require("../services/recette.service.js");
 const { Recipe } = require("../config/database");
 
+const { validationResult } = require("express-validator");
 
 module.exports = {
   async getRecettes(req, res, next) {
@@ -16,14 +17,15 @@ module.exports = {
  
 
   async addRecette(req, res, next) {
-    //  console.log("--------------------------->",req.files)
-    // const reqFiles = [];
-    // const url = req.protocol + "://" + req.get("host");
-    // for (var i = 0; i < req.files.length; i++) {
-    //   reqFiles.push(req.files[i].filename);
-    // }
-    // console.log(req.files);
+   
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        const error = new Error("Validation failed");
+        error.statusCode = 422;
+        error.data = errors.array();
+        throw error;
+      }
     const Recette = await recetteService.addRecette({
       Description: req.body.Description,
       Date: req.body.Date,
@@ -69,7 +71,13 @@ module.exports = {
   async updateRecette(req, res, next) {
   
     try {
-    
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        const error = new Error("Validation failed");
+        error.statusCode = 422;
+        error.data = errors.array();
+        throw error;
+      }
       const recette = await recetteService.updateRecette(req.params,{
         Description: req.body.Description,
         Date: req.body.Date,
