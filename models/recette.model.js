@@ -3,41 +3,54 @@ const { DataTypes } = require('sequelize');
 const createRecipeModel = (sequelize, communityBase) => {
 
 var Recipe = sequelize.define('Recipe', {
-  id: {
-      type: DataTypes.BIGINT,
-      field: 'id',
-      primaryKey: true,
-  autoIncrement: true,
-  allowNull: false,
+  Id_recette: {
+    type: DataTypes.STRING,
+    primaryKey: true,
+    allowNull: false,
   },
-  titre: {
+  Description: {
   type: DataTypes.STRING(255),
 
   },
-  image: {
+  Date: {
   type: DataTypes.STRING(255),
 
   },
-  pdf:{
+  Cuisinier:{
     type: DataTypes.STRING(255),
 
   },
-  ingredient: {
+  temps_Préparation: {
   type: DataTypes.STRING(255),
 
 
  
   },
-  description: {
+  temps_cuisson: {
   type: DataTypes.STRING(255),
  
 
   },
-  categorie:{
+  nombre_personne:{
     type: DataTypes.STRING(255),
    
 
-  }
+  },
+  Ingrédient:{
+    type: DataTypes.STRING(255)
+  },
+  Préparation:{
+    type:DataTypes.STRING(255)
+  },
+  Ustensile:{
+    type: DataTypes.STRING(255)
+  },
+  Photo:{
+    type: DataTypes.STRING(255)
+  },
+  video:{
+    type: DataTypes.STRING(255)
+  },
   },
   {
     charset: 'utf8',
@@ -45,6 +58,14 @@ var Recipe = sequelize.define('Recipe', {
       collate: 'utf8_general_ci',
     },
     tableName: `${sequelize.config.database}.recettes`,
+    hooks: {
+      beforeValidate: async function (recette) {
+        recette.Id_recette = `${
+          sequelize.config.database.split("_")[1]
+        }_${Date.now()}`;
+      },
+    
+    },
   } 
 );
 (async () => {

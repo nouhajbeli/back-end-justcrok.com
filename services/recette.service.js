@@ -11,18 +11,19 @@ module.exports = new (class RecetteService {
     addRecette(payload) {
       return Recipe.models.Recipe.create(payload);
     }
-    deleteRecette({id}){
-      return Recipe.models.Recipe.destroy({where: { id: id }})
+    deleteRecette({Id_recette}){
+      return Recipe.models.Recipe.destroy({where: { Id_recette: Id_recette }})
     }
-    updateRecette({id},paylod){
-      return Recipe.models.Recipe.update(paylod,  {
+    updateRecette({Id_recette},payload){
+      console.log(payload)
+      return Recipe.models.Recipe.update(payload,  {
         where: {
-          id: id,
+          Id_recette: Id_recette,
         },
       })
     }
-    getRecetteById({id}) {
-      return Recipe.models.Recipe.findByPk(id)
+    getRecetteById({Id_recette}) {
+      return Recipe.models.Recipe.findByPk(Id_recette)
     }
     
   })();
