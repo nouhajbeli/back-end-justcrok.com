@@ -24,9 +24,9 @@ var upload = multer({
       cb(null, true);
     }
   });
-router.post("/",upload.array("file", 2), recetteController.addRecette);
-router.delete("/:id",recetteController.deleteRecetteById)
-router.put("/:id",upload.array("file", 2),recetteController.updateRecette)
-router.get("/:id", recetteController.getrecetteById);
+router.post("/",upload.single("file"), recetteController.addRecette);
+router.delete("/:Id_recette",recetteController.deleteRecetteById)
+router.put("/:Id_recette",upload.single("file"),recetteController.updateRecette)
+router.get("/:Id_recette", recetteController.getrecetteById);
 
 module.exports = router;
