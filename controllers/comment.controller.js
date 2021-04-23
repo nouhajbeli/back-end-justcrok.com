@@ -1,11 +1,14 @@
 const commentService = require("../services/comment.service.js");
 const { community } = require("../config/database");
+const { validationResult } = require("express-validator");
 
 
 module.exports = {
   async getCommentsByRecette(req, res, next) {
+
     try {
-      const recettes= await commentService.getCommentaires();
+        const { Id_recette } = req.params;
+      const recettes= await commentService.getCommentaires(req.params);
       res.send(recettes);
     } catch (error) {
       // handle error
@@ -17,9 +20,15 @@ module.exports = {
 
   async addComment(req, res, next) {
       
-    const { commentaire, UserId,Id_recette} = req.body;
-console.log(req.body)
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          const error = new Error("Validation failed");
+          error.statusCode = 422;
+          error.data = errors.array();
+          throw error;
+        }
+        const { commentaire, UserId,Id_recette} = req.body;
     const comment = await commentService.addCommentaire(req.body);
       res.send(comment);
     } catch (error) {
@@ -29,41 +38,28 @@ console.log(req.body)
   },
   async deleteComment(req, res, next) {
     try {
-      const recette = await commentService.deleteRecette(req.params);
-      res.send('deleted');
+      const comment = await commentService.deleteCommentaire(req.params);
+      res.send(comment);
     } catch (error) {
       // handle error
         next(error)   
  }
   },
-  async getrecetteById(req, res, next) {
-    try {
-      const recette = await commentService.getRecetteById(req.params);
-      res.send(recette);
-    } catch (error) {
-      // handle error
-          next(error)   
-         }
-  },
+
  
   async updateComment(req, res, next) {
-  
+
     try {
-    
-      const recette = await commentService.updateRecette(req.params,{
-        Description: req.body.Description,
-        Date: req.body.Date,
-        Cuisinier: req.file.Cuisinier,
-        temps_Préparation:req.body.temps_Préparation,
-        Ingrédient :req.body.Ingrédient,
-        temps_cuisson: req.body.temps_cuisson,
-        nombre_personne: req.body.nombre_personne,
-        Préparation: req.body.Préparation,
-        Ustensile: req.body.Ustensile,
-        Photo: req.file.filename,
-        video: req.body.video,
-      });
-      res.json(recette);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          const error = new Error("Validation failed");
+          error.statusCode = 422;
+          error.data = errors.array();
+          throw error;
+        }
+        const { commentaire, id, Id_recette, UserId } = req.body;
+      const comment = await commentService.updateCommentaire(req.body);
+      res.json(comment);
     } catch (error) {
       // handle error
       next(error)     

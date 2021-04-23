@@ -32,7 +32,13 @@ const User = sequelize.define("User", {
       password: {
         type: DataTypes.STRING,
       },
-      
+      resetToken:{
+        type: DataTypes.STRING
+      },
+      expireToken:{
+        type: DataTypes.STRING
+      }
+      ,
       createdAt: {
           type: DataTypes.DATE,
           defaultValue: sequelize.fn('now'),

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const recetteController = require("../controllers/recette.controller.js");
 const multer = require("multer");
+const { body } = require("express-validator");
 
 router.get("/", recetteController.getRecettes);
 const DIR = "../front-end/src/assets/uploads/recettes/";
