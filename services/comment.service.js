@@ -14,8 +14,8 @@ module.exports = new (class CommentService {
         
       return community.models.Commentaire.create(payload);
     }
-    deleteCommentaire({Id_recette}){
-      return community.models.Commentaire.destroy({where: { Id_recette: Id_recette }})
+    deleteCommentaire({id}){
+      return community.models.Commentaire.destroy({where: { id:id }})
     }
     updateCommentaire({commentaire, id, Id_recette, UserId}){
       return community.models.Commentaire.update(  { commentaire },

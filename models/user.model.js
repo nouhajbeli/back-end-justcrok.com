@@ -39,6 +39,9 @@ const User = sequelize.define("User", {
         type: DataTypes.STRING
       }
       ,
+      role:{
+        type: DataTypes.STRING
+      },
       createdAt: {
           type: DataTypes.DATE,
           defaultValue: sequelize.fn('now'),
