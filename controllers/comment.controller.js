@@ -39,7 +39,7 @@ module.exports = {
   async deleteComment(req, res, next) {
     try {
       const comment = await commentService.deleteCommentaire(req.params);
-      res.send(comment);
+      res.json(comment);
     } catch (error) {
       // handle error
         next(error)   
