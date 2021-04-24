@@ -14,4 +14,7 @@ router.get('/userProfile',jwtHelper.verifyJwtToken,userController.userProfile)
 router.post("/reset-password", userController.resetPassword);
 // new password
 router.post("/newpassword/:token", userController.newpassword);
+router.get("/userProfileId/:id", jwtHelper.verifyJwtToken, userController.findUser);
+router.get("/getUsers",userController.getAllUsers);
+
 module.exports = router;

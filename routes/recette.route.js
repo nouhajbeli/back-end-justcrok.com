@@ -4,11 +4,11 @@ const multer = require("multer");
 const { body } = require("express-validator");
 
 router.get("/", recetteController.getRecettes);
-const DIR = "../front-end/src/assets/uploads/recettes/";
+const DIR = "../front-justcrock.com/src/assets/uploads/recettes/";
 var name_file;
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads");  },
+    cb(null, DIR);  },
   filename: (req, file, cb) => {
     const fileName = file.originalname.toLowerCase().split(" ").join("-");
     name_file = fileName;
