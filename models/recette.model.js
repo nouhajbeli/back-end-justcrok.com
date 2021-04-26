@@ -20,7 +20,7 @@ var Recipe = sequelize.define('Recipe', {
     type: DataTypes.STRING(255),
 
   },
-  temps_Préparation: {
+  temps_Preparation: {
   type: DataTypes.STRING(255),
 
 
@@ -36,10 +36,10 @@ var Recipe = sequelize.define('Recipe', {
    
 
   },
-  Ingrédient:{
+  Ingredient:{
     type: DataTypes.STRING(255)
   },
-  Préparation:{
+  Preparation:{
     type:DataTypes.STRING(255)
   },
   Ustensile:{
