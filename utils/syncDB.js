@@ -3,13 +3,14 @@ const createRecipeModel = require("../models/recette.model");
 const createUserModel = require("../models/user.model");
 
 const createCommentaireModel = require("../models/commentaire.model");
+const createRateModel = require("../models/rate.model");
 
 
 
 
 const syncCommunityDB = async (dbName) => {
   await createUserModel(dbName);
-  
+  await createRateModel(dbName)
   await createCommentaireModel(dbName);
  
 };

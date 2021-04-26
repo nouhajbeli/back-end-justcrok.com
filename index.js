@@ -17,6 +17,8 @@ const contactRoute = require("./routes/contact.route");
 const commentRoute = require("./routes/comment.route.js");
 const recetteRoute = require("./routes/recette.route.js");
 const userRoute = require("./routes/user.route.js");
+const rateRoute = require("./routes/rate.route.js");
+
 require('./config/passportConfig')
 // var server = http.createServer(app);
 // var io = require('socket.io').listen(server);
@@ -51,6 +53,7 @@ app.use(
 app.use("/api/recette", recetteRoute);
 app.use("/api/user", userRoute);
 app.use("/api/comment", commentRoute);
+app.use("/api/rate", rateRoute);
 
 // io.on("connection", function (socket) {
 //   console.log("user connected");
