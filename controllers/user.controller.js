@@ -38,10 +38,10 @@ module.exports = {
               }
             });
           if (existedUser) {
-            const error = Error("email already exists");
-            (error.statusCode = 409),
-              (error.data = [{ param: "email", msg: "email existe" }]);
-            throw error;
+              return res
+                .status(409)
+                .json({ error: "email already exists" });
+            
           }else {
             const user= await userService.adduser(req.body);
             transporter
@@ -53,11 +53,10 @@ module.exports = {
             })
             .then(console.log("Success!"))
             .catch((err) => console.log(err));
-          res.send(user);
+               res.send(user);
           }
         }
         } catch (error) {
-          // res.status(500).send(error);
           next(error)
         }  
  },
@@ -110,7 +109,7 @@ module.exports = {
               });
             })
             .catch((err) => {
-              console.log(err);
+              next(err)
             });
          },
         async resetPassword(req,res,next){
@@ -147,7 +146,7 @@ module.exports = {
                     });
                     res.json({ message: "check your email" });
                   })
-                  .catch((err) => console.log(err));
+                  .catch((err) => next(err));
               });
             });
           } catch (error) {
