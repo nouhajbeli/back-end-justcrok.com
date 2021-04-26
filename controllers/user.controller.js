@@ -11,12 +11,12 @@ const jwt=require('jsonwebtoken')
 const nodemailer = require("nodemailer");
 
 let transporter = nodemailer.createTransport({
-  host: 'mail.justcrok.org',
+  host: process.env.host,
   port: 465, 
   secure: true,
   auth: {
-  user: 'noreply@justcrok.org',
-  pass: 'Yasmine3150&'
+  user: process.env.justcrokmail,
+  pass: process.env.pass
   }
 })
 
