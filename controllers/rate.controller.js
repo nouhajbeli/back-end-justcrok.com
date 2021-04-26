@@ -11,7 +11,6 @@ module.exports = {
       const rates= await RateService.getrates(req.params);
       res.send(rates);
     } catch (error) {
-      // handle error
     next(error)      
     }
   },
@@ -33,7 +32,6 @@ module.exports = {
     const rate = await RateService.addRate(req.body);
       res.send(rate);
     } catch (error) {
-      // handle error
       next(error)
     }
   },
@@ -53,7 +51,6 @@ module.exports = {
       const rate = await RateService.updateRate(req.body);
       res.json(rate);
     } catch (error) {
-      // handle error
       next(error)     
       }
   },
@@ -67,7 +64,7 @@ module.exports = {
       }
       res.status(200).json(rates);
     } catch (error) {
-      // console.log(error)
+      
       next(error);
     }
   }
