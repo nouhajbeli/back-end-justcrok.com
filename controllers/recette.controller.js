@@ -29,18 +29,16 @@ module.exports = {
     const Recette = await recetteService.addRecette({
       Description: req.body.Description,
       Date: req.body.Date,
-      Cuisinier: req.file.Cuisinier,
-      temps_Préparation:req.body.temps_Préparation,
-      Ingrédient :req.body.Ingrédient,
+      Cuisinier: req.body.Cuisinier,
+      temps_Preparation:req.body.temps_Preparation,
+      Ingredient :req.body.Ingredient,
       temps_cuisson: req.body.temps_cuisson,
       nombre_personne: req.body.nombre_personne,
-      Préparation: req.body.Préparation,
+      Preparation: req.body.Preparation,
       Ustensile: req.body.Ustensile,
       Photo: req.file.filename,
       video: req.body.video,
     });
-
-   
 
     
       res.send(Recette);

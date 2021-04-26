@@ -13,7 +13,8 @@ const databases = require("./config/database");
 var http = require("http");
 const app = express();
 const morgan = require("morgan");
-const commentRoutes = require("./routes/comment.route.js");
+const contactRoute = require("./routes/contact.route");
+const commentRoute = require("./routes/comment.route.js");
 const recetteRoute = require("./routes/recette.route.js");
 const userRoute = require("./routes/user.route.js");
 require('./config/passportConfig')
@@ -43,10 +44,13 @@ app.use(cors());
 
 app.use(passport.initialize())
 app.use(morgan("dev"));
-
+app.use(
+  "/api/contact",
+  contactRoute
+);
 app.use("/api/recette", recetteRoute);
 app.use("/api/user", userRoute);
-app.use("/api/comment", commentRoutes);
+app.use("/api/comment", commentRoute);
 
 // io.on("connection", function (socket) {
 //   console.log("user connected");
