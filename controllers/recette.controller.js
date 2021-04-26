@@ -29,7 +29,7 @@ module.exports = {
     const Recette = await recetteService.addRecette({
       Description: req.body.Description,
       Date: req.body.Date,
-      Cuisinier: req.file.Cuisinier,
+      Cuisinier: req.body.Cuisinier,
       temps_Préparation:req.body.temps_Préparation,
       Ingrédient :req.body.Ingrédient,
       temps_cuisson: req.body.temps_cuisson,
@@ -39,8 +39,6 @@ module.exports = {
       Photo: req.file.filename,
       video: req.body.video,
     });
-
-   
 
     
       res.send(Recette);
