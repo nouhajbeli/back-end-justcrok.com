@@ -47,6 +47,11 @@ const User = sequelize.define("User", {
           defaultValue: sequelize.fn('now'),
 
       },
+      imageUrl:{
+        type: DataTypes.STRING,
+        defaultValue: "1024px-OOjs_UI_icon_userAvatar-constructive.svg"
+
+      },
       updatedAt: {
           type: DataTypes.DATE,
           defaultValue: sequelize.fn('now'),
