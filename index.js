@@ -18,6 +18,7 @@ const commentRoute = require("./routes/comment.route.js");
 const recetteRoute = require("./routes/recette.route.js");
 const userRoute = require("./routes/user.route.js");
 const rateRoute = require("./routes/rate.route.js");
+const avisRoute = require("./routes/avis.route.js");
 
 require('./config/passportConfig')
 var server = http.createServer(app);
@@ -54,6 +55,7 @@ app.use("/api/recette", recetteRoute);
 app.use("/api/user", userRoute);
 app.use("/api/comment", commentRoute);
 app.use("/api/rate", rateRoute);
+app.use("/api/avis", avisRoute);
 
 io.on("connection", function (socket) {
   console.log("user connected");
