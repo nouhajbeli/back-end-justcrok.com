@@ -4,7 +4,7 @@ const jwtHelper=require('../config/jwtHelper')
 const { body } = require("express-validator");
 const multer = require("multer");
 const crypto = require("crypto");
-const DIR = "../front-justcrock.com/src/assets/uploads/recettes/";
+const DIR = "../front-justcrock.com/src/assets/uploads/img/";
 var name_file;
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
