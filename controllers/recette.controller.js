@@ -50,7 +50,7 @@ module.exports = {
   async deleteRecetteById(req, res, next) {
     try {
       const recette = await recetteService.deleteRecette(req.params);
-      res.send('deleted');
+      res.json(recette);
     } catch (error) {
       // handle error
         next(error)   
