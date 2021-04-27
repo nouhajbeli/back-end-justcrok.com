@@ -20,8 +20,8 @@ const userRoute = require("./routes/user.route.js");
 const rateRoute = require("./routes/rate.route.js");
 
 require('./config/passportConfig')
-// var server = http.createServer(app);
-// var io = require('socket.io').listen(server);
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 const createAdmin = require("./utils/admin");
 
 const passport = require('passport');
@@ -55,19 +55,19 @@ app.use("/api/user", userRoute);
 app.use("/api/comment", commentRoute);
 app.use("/api/rate", rateRoute);
 
-// io.on("connection", function (socket) {
-//   console.log("user connected");
+io.on("connection", function (socket) {
+  console.log("user connected");
 
-//   socket.on("chat message", (message) => {
-//     console.log(message);
-//     io.emit("chat message", message);
-//   });
-//   socket.on("disconnect", function () {
-//     console.log("user disconnected");
-//   });
-// });
+  socket.on("chat message", (message) => {
+    console.log(message);
+    io.emit("chat message", message);
+  });
+  socket.on("disconnect", function () {
+    console.log("user disconnected");
+  });
+});
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
