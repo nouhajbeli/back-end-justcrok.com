@@ -12,11 +12,11 @@ module.exports = new (class AvisService {
         
       return community.models.Avis.create(payload);
     }
-    deleteAvis({id}){
+    deletAvis({id}){
       return community.models.Avis.destroy({where: { id:id }})
     }
     updateAvis({avis, id, UserId}){
-      return community.models.Commentaire.update(  { avis },
+      return community.models.Avis.update({ avis },
         {
           where: {
             UserId: UserId,
