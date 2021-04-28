@@ -13,12 +13,16 @@ const databases = require("./config/database");
 var http = require("http");
 const app = express();
 const morgan = require("morgan");
-const commentRoutes = require("./routes/comment.route.js");
+const contactRoute = require("./routes/contact.route");
+const commentRoute = require("./routes/comment.route.js");
 const recetteRoute = require("./routes/recette.route.js");
 const userRoute = require("./routes/user.route.js");
+const rateRoute = require("./routes/rate.route.js");
+const avisRoute = require("./routes/avis.route.js");
+
 require('./config/passportConfig')
-// var server = http.createServer(app);
-// var io = require('socket.io').listen(server);
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 const createAdmin = require("./utils/admin");
 
 const passport = require('passport');
@@ -43,24 +47,29 @@ app.use(cors());
 
 app.use(passport.initialize())
 app.use(morgan("dev"));
-
+app.use(
+  "/api/contact",
+  contactRoute
+);
 app.use("/api/recette", recetteRoute);
 app.use("/api/user", userRoute);
-app.use("/api/comment", commentRoutes);
+app.use("/api/comment", commentRoute);
+app.use("/api/rate", rateRoute);
+app.use("/api/avis", avisRoute);
 
-// io.on("connection", function (socket) {
-//   console.log("user connected");
+io.on("connection", function (socket) {
+  console.log("user connected");
 
-//   socket.on("chat message", (message) => {
-//     console.log(message);
-//     io.emit("chat message", message);
-//   });
-//   socket.on("disconnect", function () {
-//     console.log("user disconnected");
-//   });
-// });
+  socket.on("chat message", (message) => {
+    console.log(message);
+    io.emit("chat message", message);
+  });
+  socket.on("disconnect", function () {
+    console.log("user disconnected");
+  });
+});
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

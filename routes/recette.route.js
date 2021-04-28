@@ -27,7 +27,7 @@ var upload = multer({
   });
 router.post("/",upload.single("Photo"), recetteController.addRecette);
 router.delete("/:Id_recette",recetteController.deleteRecetteById)
-router.put("/:Id_recette",upload.single("file"),recetteController.updateRecette)
+router.put("/:Id_recette",upload.single("Photo"),recetteController.updateRecette)
 router.get("/:Id_recette", recetteController.getrecetteById);
 
 module.exports = router;

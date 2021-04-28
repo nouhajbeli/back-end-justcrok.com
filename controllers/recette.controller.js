@@ -30,11 +30,11 @@ module.exports = {
       Description: req.body.Description,
       Date: req.body.Date,
       Cuisinier: req.body.Cuisinier,
-      temps_Préparation:req.body.temps_Préparation,
-      Ingrédient :req.body.Ingrédient,
+      temps_Preparation:req.body.temps_Preparation,
+      Ingredient :req.body.Ingredient,
       temps_cuisson: req.body.temps_cuisson,
       nombre_personne: req.body.nombre_personne,
-      Préparation: req.body.Préparation,
+      Preparation: req.body.Preparation,
       Ustensile: req.body.Ustensile,
       Photo: req.file.filename,
       video: req.body.video,
@@ -50,7 +50,7 @@ module.exports = {
   async deleteRecetteById(req, res, next) {
     try {
       const recette = await recetteService.deleteRecette(req.params);
-      res.send('deleted');
+      res.json(recette);
     } catch (error) {
       // handle error
         next(error)   
@@ -65,7 +65,6 @@ module.exports = {
           next(error)   
          }
   },
- 
   async updateRecette(req, res, next) {
   
     try {
@@ -79,12 +78,11 @@ module.exports = {
       const recette = await recetteService.updateRecette(req.params,{
         Description: req.body.Description,
         Date: req.body.Date,
-        Cuisinier: req.file.Cuisinier,
-        temps_Préparation:req.body.temps_Préparation,
-        Ingrédient :req.body.Ingrédient,
+        temps_Preparation:req.body.temps_Preparation,
+        Ingredient :req.body.Ingredient,
         temps_cuisson: req.body.temps_cuisson,
         nombre_personne: req.body.nombre_personne,
-        Préparation: req.body.Préparation,
+        Preparation: req.body.Preparation,
         Ustensile: req.body.Ustensile,
         Photo: req.file.filename,
         video: req.body.video,
