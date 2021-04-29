@@ -20,9 +20,6 @@ exports.sendEmail = async (req, res, next) => {
     }
     const { nom, email, message} = req.body;
  
-    
-
-  
     transporter
     .sendMail({
       to: process.env.justcrokmail ,

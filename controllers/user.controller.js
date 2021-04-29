@@ -85,9 +85,10 @@ module.exports = {
             if(err) 
             return res.status(400).json(err);
             else if(user){
-            return res.status(200).json({"token":jwt.sign({ id: user.id },'SECRET#123', {
+              console.log(user.status)
+            return res.status(200).json({token:jwt.sign({ id: user.id },'SECRET#123', {
               expiresIn: '24h' // expires in 24 hours
-            })})
+            }),status:user.status})
             }
             else return res.status(404).json(info)
           })(req,res)

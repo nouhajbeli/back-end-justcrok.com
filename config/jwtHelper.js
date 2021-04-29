@@ -13,6 +13,8 @@ module.exports.verifyJwtToken=(req,res, next)=>{
          else {
              console.log(decoded)
              req.id=decoded.id
+             req.status=decoded.status
+
              next()
          }
       
