@@ -4,16 +4,15 @@ const jwtHelper=require('../config/jwtHelper')
 const { body } = require("express-validator");
 const multer = require("multer");
 const crypto = require("crypto");
-const DIR = "../front-justcrock.com/src/assets/uploads/images/";
+// const DIR = "../justcrock.com/src/assets/uploads/images/";
 var name_file;
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, DIR);  },
+    cb(null, "uploads/images");
+  },
   filename: (req, file, cb) => {
-    const fileName = file.originalname.toLowerCase().split(" ").join("-");
-    name_file = fileName;
-    cb(null, fileName);
-  }
+    cb(null, Date.now() + "-" + file.originalname);
+  },
 });
 
 var upload = multer({

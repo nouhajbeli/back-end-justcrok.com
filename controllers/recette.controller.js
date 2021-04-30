@@ -1,5 +1,6 @@
 const recetteService = require("../services/recette.service.js");
 const { Recipe } = require("../config/database");
+const clearImage = require("../utils/clearImage");
 
 const { validationResult } = require("express-validator");
 
@@ -10,6 +11,7 @@ module.exports = {
       res.send(recettes);
     } catch (error) {
       // handle error
+      console.log(error)
     next(error)      
     }
   },
@@ -17,7 +19,10 @@ module.exports = {
  
 
   async addRecette(req, res, next) {
-   
+    const url = req.protocol + "://" + req.get("host");
+    let image;
+    image = url + "/uploads/images/" + req.file.filename
+      
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -36,7 +41,7 @@ module.exports = {
       nombre_personne: req.body.nombre_personne,
       Preparation: req.body.Preparation,
       Ustensile: req.body.Ustensile,
-      Photo: req.file.filename,
+      Photo: image,
       video: req.body.video,
     });
 
@@ -44,6 +49,7 @@ module.exports = {
       res.send(Recette);
     } catch (error) {
       // handle error
+      console.log(error)
       next(error)
     }
   },
@@ -66,7 +72,13 @@ module.exports = {
          }
   },
   async updateRecette(req, res, next) {
-  
+    let image;
+    if( ! req.file ){
+        image=req.body.Photo
+       }else {
+        image = req.file.path.replace("\\", "/");
+
+       }
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -84,7 +96,7 @@ module.exports = {
         nombre_personne: req.body.nombre_personne,
         Preparation: req.body.Preparation,
         Ustensile: req.body.Ustensile,
-        Photo: req.file.filename,
+        Photo: image,
         video: req.body.video,
       });
       res.json(recette);

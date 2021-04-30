@@ -2,6 +2,7 @@ var dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 const cors = require("cors");
 const connectDB = require("./utils/connectDB");
 const {
@@ -56,6 +57,7 @@ app.use("/api/user", userRoute);
 app.use("/api/comment", commentRoute);
 app.use("/api/rate", rateRoute);
 app.use("/api/avis", avisRoute);
+app.use("/uploads/images", express.static(path.join("uploads/images")));
 
 io.on("connection", function (socket) {
   console.log("user connected");

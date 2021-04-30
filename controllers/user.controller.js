@@ -31,9 +31,12 @@ module.exports = {
         error.data = errors.array();
         throw error;
       }
+      const url = req.protocol + "://" + req.get("host");
+    let imageUrl;
+    imageUrl = url + "/uploads/images/" + req.file.filename
       const image = await userService.updateimage(req.body,{
        
-        imageUrl: req.file.filename,
+        imageUrl:imageUrl,
       });
       res.json(image);
     } catch (error) {
@@ -161,7 +164,7 @@ module.exports = {
                       subject: "password reset",
                       html: `
                         <p>You requested for password reset</p>
-                        <h5>click in this <a href="http://localhost:4200/newpassword/${token}">link</a> to reset password</h5>
+                        <h5>click in this <a href="http://justcrok.com/newpassword/${token}">link</a> to reset password</h5>
                         `,
                     });
                     res.json({ message: "check your email" });
