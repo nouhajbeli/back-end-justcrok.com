@@ -164,7 +164,7 @@ module.exports = {
                       subject: "password reset",
                       html: `
                         <p>You requested for password reset</p>
-                        <h5>click in this <a href="http://justcrok.com/newpassword/${token}">link</a> to reset password</h5>
+                        <h5>click in this <a href="https://justcrok.com/newpassword/${token}">link</a> to reset password</h5>
                         `,
                     });
                     res.json({ message: "check your email" });

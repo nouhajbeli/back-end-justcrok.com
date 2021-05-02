@@ -49,7 +49,7 @@ const User = sequelize.define("User", {
       },
       imageUrl:{
         type: DataTypes.STRING,
-        defaultValue: "http://jcback.justcrok.com/uploads/images/1024px-OOjs_UI_icon_userAvatar-constructive.svg.png"
+        defaultValue: "https://jcback.justcrok.com/uploads/images/1024px-OOjs_UI_icon_userAvatar-constructive.svg.png"
 
       },
       status: {
